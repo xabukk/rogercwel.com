@@ -5,12 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+
+    <script>
+
+const imgPoss = [];
+
+let maxX, maxY;
+
+function placeImg() {
+    const imgSrc = 'img/cwel.jpg';
+    const {random: r} = Math;
+    
+    const x = r() * maxX;
+    const y = r() * maxY;
+    
+    if(!isOverlap(x,y)) {
+        var link = `<img class="kretyno" style="left: ${x}px; top: ${y}px;" src="${imgSrc}" />`;
+        var bodyHtml = document.body.innerHTML;
+        document.body.innerHTML = bodyHtml + link;
+        
+        imgPoss.push({x, y}); // record all img positions
+    }
+}
+
+function isOverlap(x, y) { // return true if overlapping
+    const img = {x: 128, y:160};
+    
+    for(const imgPos of imgPoss) {
+        if( x>imgPos.x-img.x && x<imgPos.x+img.x &&
+            y>imgPos.y-img.y && y<imgPos.y+img.y ) return true;
+    }
+    return false;
+}
+
+onload = function() {
+    maxX = innerWidth - 128;
+    maxY = innerHeight - 160;
+    setInterval(placeImg, 10);
+}
+
+onresize = function() {
+    maxX = innerWidth - 128;
+    maxY = innerHeight - 160;
+}
+
+    </script>
 </head>
 <body>
     <h1>ROGER CWEL</h1>
-    <img class="spin3D" src="img/cwel.jpg">
+    <img class="spin3D" src="img/cwel.jpg" width="70%">
 
-    <img class="spin" src="img/cwel2.jpg">
+    <img class="spin" src="img/cwel2.jpg"  width="82%">
 
 
 
@@ -19,9 +64,17 @@
 
 <img class="spin" src="img/cwel3.jpg" width="40% " id="trr">
 
-<marquee behavior="alternate" scrollamount="170">
-    <img src="img/cwel4.jpg"  alt="skibid">
+<marquee behavior="alternate" scrollamount="100">
+    <img src="img/cwel4.jpg"  width="100%"   class="skibid">
+
     </marquee>
+
+
+    <img  src="img/spermbank.gif" class="skibid1" >
+
+
+
+    <img src="img/filesigma.png" id="cwel" class="spin">
 
 
 
